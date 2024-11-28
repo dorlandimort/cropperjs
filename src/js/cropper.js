@@ -275,7 +275,9 @@ class Cropper {
       }
     };
 
-    sizingImage.src = image.src;
+    if (this.options.checkCrossOrigin && isCrossOriginURL(image.src)) {
+      sizingImage.src = addTimestamp(image.src);
+    } else sizingImage.src = image.src;
 
     // iOS WebKit will convert the image automatically
     // with its orientation once append it into DOM (#279)
